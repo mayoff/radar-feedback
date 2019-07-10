@@ -1,0 +1,127 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 FB6199160\
+\
+
+\f1\i 6/22/19, 3:08:00 PM CDT\
+\
+
+\f2\i0\b\fs36 SwiftUI macOS .fixedSize causes couldNotCreateInitialBitmapRep error\
+
+\fs30 Developer Tools | SwiftUI Framework\
+\
+
+\fs28 Basic information\
+\
+
+\fs24 Please provide a descriptive title for your feedback:\
+
+\f0\b0 SwiftUI macOS .fixedSize causes couldNotCreateInitialBitmapRep error\
+\
+
+\f2\b Which area are you seeing an issue with?\
+
+\f0\b0 SwiftUI Framework\
+\
+
+\f2\b What type of feedback are you reporting?\
+
+\f0\b0 Application Crash\
+\
+
+\f2\b\fs28 Description\
+\
+
+\fs24 Please describe the issue:\
+
+\f0\b0 Dear SwiftUImplementors,\
+\
+Here's the diagnostics produced by the prefix pane:\
+\
+    stripedSpheres.app: Error Domain=com.apple.dt.UITestingAgent Code=-1 "couldNotCreateInitialBitmapRep" UserInfo=\{NSLocalizedDescription=couldNotCreateInitialBitmapRep\}\
+\
+Here's the code:\
+\
+    import SwiftUI\
+\
+    struct SphereView : View \{\
+        var body: some View \{\
+            ZStack \{\
+                Circle()\
+                    .fill(colorFill)\
+                Circle()\
+                    .fill(shadowFill)\
+            \}\
+        \}\
+\
+        var colorFill: RadialGradient \{\
+            let colors = Gradient(stops: [\
+                .init(color: .white, location: 0),\
+                .init(color: .init(red: 0.9813960195, green: 0.7744863629, blue: 0.5789747238), location: 1)\
+            ])\
+            return .init(\
+                gradient: colors,\
+                center: .init(x: 0.4, y: 0.4),\
+                startRadius: 0,\
+                endRadius: Self.size / 2)\
+        \}\
+\
+        var shadowFill: RadialGradient \{\
+            let colors = Gradient(stops: [\
+                .init(color: .clear, location: 0),\
+                .init(color: Color.black.opacity(0.9), location: 1)\
+            ])\
+            return .init(\
+                gradient: colors,\
+                center: .center,\
+                startRadius: 0,\
+                endRadius: Self.size / 2)\
+        \}\
+\
+        static var size: CGFloat \{ return 140 \}\
+    \}\
+\
+    #if DEBUG\
+    struct SphereView_Previews : PreviewProvider \{\
+        static var previews: some View \{\
+            SphereView()\
+                .fixedSize()\
+                .previewLayout(.fixed(width: SphereView.size, height: SphereView.size))\
+        \}\
+    \}\
+    #endif\
+\
+Removing the `.fixedSize()` modifier lets the preview pane work again.\
+\
+Please fix.\
+\
+Thanks,\
+Rob\
+\
+\
+\
+
+\f2\b Please list the steps you took to reproduce the issue:\
+
+\f0\b0  \
+\
+
+\f2\b What did you expect to happen?\
+
+\f0\b0  \
+\
+
+\f2\b What actually happened?\
+
+\f0\b0  \
+\
+
+\f2\b\fs28 Files\
+
+\f0\b0\fs24 previews-diagnostics-20190622-150427.zip\
+}

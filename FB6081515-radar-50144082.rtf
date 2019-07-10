@@ -1,0 +1,156 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 FB6081515\
+\
+
+\f1\i 4/23/19, 4:22:56 PM CDT\
+\
+
+\f2\i0\b\fs36 NSPopover detached window loses contentViewController 50144082\
+
+\fs30 macOS\
+\
+
+\fs28 Basic Information\
+\
+
+\fs24 Please provide a descriptive title for your feedback\
+
+\f0\b0 NSPopover detached window loses contentViewController\
+\
+
+\f2\b Which product are you seeing an issue with?\
+
+\f0\b0 macOS + SDK\
+\
+
+\f2\b Which area are you seeing an issue with?\
+
+\f0\b0 \
+\
+
+\f2\b\fs28 Description\
+\
+
+\fs24 Please describe the issue and what steps we can take to reproduce it\
+
+\f0\b0 Area:\
+AppKit\
+\
+Dear AppKitterinos,\
+\
+You probably know that, to show an NSPopover, we must set its contentViewController property to an NSViewController.\
+\
+And you probably know that, to detach a popover into a custom window, we must implement detachableWindowForPopover: in the popover\'92s delegate, and the detached window cannot share the popover\'92s contentViewController.\
+\
+So the logical approach is to create an NSViewController subclass to manage the popover\'92s content and the detached window\'92s content, and create separate instances of this subclass for the popover and for the detached window.\
+\
+The problem arises when we create an NSWindow, set its contentViewController to a new instance, and then return the NSWindow from detachableWindowForPopover:. AppKit temporarily replaces the new window\'92s contentView. It restores the window\'92s contentView but does not restore the window\'92s contentViewController. The original contentViewController of the new window is lost.\
+\
+I will attach a test project. To reproduce the problem in the test project:\
+\
+1. Launch the test app.\
+2. Click the \'93Show Popover\'94 button.\
+3. Drag the popover to detach it.\
+4. As soon as we begin the drag, we see a message in the main window showing the description of the newly created ContentViewController.\
+5. When we release the drag, the detached window shows a message put there by the detached window\'92s ContentViewController when it was destroyed.\
+\
+That ContentViewController should not have been destroyed!\
+\
+Apparently bugreport.apple.com now limits the description field to 3000 characters, so I will continue this report in comments\'85\
+\
+
+\f2\b\fs28 Files\
+
+\f0\b0\fs24 popover-bug.zip\
+\
+
+\f1\i 4/23/19, 4:22:57 PM CDT\
+
+\f2\i0\b Apple Said\
+
+\f0\b0 This feedback was created from radar ID 50144082\
+\
+\
+\
+\
+\
+\
+
+\f1\i 4/23/19, 4:27:17 PM CDT\
+
+\f2\i0\b You Said\
+
+\f0\b0 Does it let me post comments if I use Safari instead of Chrome?\
+\
+\
+\
+\
+
+\f1\i 4/23/19, 4:28:05 PM CDT\
+
+\f2\i0\b You Said\
+
+\f0\b0 Okay, apparently I can post a bug in Chrome but I can't post comments on the bug in Chrome. So, continuing in Safari\'85\
+\
+Checking the console output, we can see what happened: our detachableWindowForPopover set the window\'92s contentViewController, which also set the window\'92s contentView:\
+\
+    2019-04-23 16:00:54.127720-0500 popover-bug[3575:200709] detachableWindowForPopover: initialized <MyPanel: 0x600003e06c00> with <ContentViewController: 0x600002c27a00> and <NSView: 0x600003306080>\
+\
+Then AppKit replaced the new window\'92s contentView by sending it setContentView:, which set the new window\'92s contentViewController to nil:\
+\
+    2019-04-23 16:00:54.148743-0500 popover-bug[3575:200709] setContentView: replaced <ContentViewController: 0x600002c27a00> with (null); replaced <NSView: 0x600003306080> with <NSView: 0x600003309cc0>\
+    2019-04-23 16:00:54.149825-0500 popover-bug[3575:200709] (\
+    	0   popover-bug                         0x0000000100001648 -[MyPanel setContentView:] + 328\
+    	1   AppKit                              0x00007fff45fafe8b __28-[NSPopover _dragWithEvent:]_block_invoke + 149\
+    	2   AppKit                              0x00007fff45552c44 NSPerformVisuallyAtomicChange + 132\
+    	3   AppKit                              0x00007fff45faf4f3 -[NSPopover _dragWithEvent:] + 1909\
+    	4   AppKit                              0x00007fff4574b313 forwardMethod + 211\
+    	5   AppKit                              0x00007fff4574b313 forwardMethod + 211\
+    	6   AppKit                              0x00007fff4574b313 forwardMethod + 211\
+    	7   AppKit                              0x00007fff4574b313 forwardMethod + 211\
+    	8   AppKit                              0x00007fff4574fc17 -[NSWindow(NSEventRouting) _handleMouseDownEvent:isDelayedEvent:] + 5724\
+    	9   AppKit                              0x00007fff45686482 -[NSWindow(NSEventRouting) _reallySendEvent:isDelayedEvent:] + 2295\
+    	10  AppKit                              0x00007fff45685943 -[NSWindow(NSEventRouting) sendEvent:] + 478\
+    	11  AppKit                              0x00007fff4552511f -[NSApplication(NSEvent) sendEvent:] + 331\
+    	12  AppKit                              0x00007fff45513944 -[NSApplication run] + 755\
+    	13  AppKit                              0x00007fff45502e4c NSApplicationMain + 777\
+    	14  popover-bug                         0x0000000100000f52 main + 34\
+    	15  libdyld.dylib                       0x00007fff73d663d5 start + 1\
+    )\
+\
+Later, AppKit restored the new window's contentView, but it did not restore the contentViewController:\
+\
+    2019-04-23 16:00:54.154460-0500 popover-bug[3575:200709] setContentView: replaced (null) with (null); replaced <NSView: 0x600003309cc0> with <NSView: 0x600003306080>\
+    2019-04-23 16:00:54.155426-0500 popover-bug[3575:200709] (\
+    	0   popover-bug                         0x0000000100001648 -[MyPanel setContentView:] + 328\
+    	1   AppKit                              0x00007fff45faff44 __28-[NSPopover _dragWithEvent:]_block_invoke + 334\
+    	2   AppKit                              0x00007fff45552c44 NSPerformVisuallyAtomicChange + 132\
+    	3   AppKit                              0x00007fff45faf4f3 -[NSPopover _dragWithEvent:] + 1909\
+    	4   AppKit                              0x00007fff4574b313 forwardMethod + 211\
+    	5   AppKit                              0x00007fff4574b313 forwardMethod + 211\
+    	6   AppKit                              0x00007fff4574b313 forwardMethod + 211\
+    	7   AppKit                              0x00007fff4574b313 forwardMethod + 211\
+    	8   AppKit                              0x00007fff4574fc17 -[NSWindow(NSEventRouting) _handleMouseDownEvent:isDelayedEvent:] + 5724\
+    	9   AppKit                              0x00007fff45686482 -[NSWindow(NSEventRouting) _reallySendEvent:isDelayedEvent:] + 2295\
+    	10  AppKit                              0x00007fff45685943 -[NSWindow(NSEventRouting) sendEvent:] + 478\
+    	11  AppKit                              0x00007fff4552511f -[NSApplication(NSEvent) sendEvent:] + 331\
+    	12  AppKit                              0x00007fff45513944 -[NSApplication run] + 755\
+    	13  AppKit                              0x00007fff45502e4c NSApplicationMain + 777\
+    	14  popover-bug                         0x0000000100000f52 main + 34\
+    	15  libdyld.dylib                       0x00007fff73d663d5 start + 1\
+    )\
+\
+I am experimenting with a workaround for this bug. The workaround is, in ContentViewController's viewWillAppear method, to set self.view.window.contentViewController = self (if it's not already self). This works in the test program, but it seems *very* fishy to change the window's contentViewController in viewWillAppear. You can enable this workaround in the test program by turning on the \'93Enable Workaround\'94\'a0checkbox.\
+\
+Please restore the detached window's contentViewController so we don't have to test fishy workarounds.\
+\
+Thanks,\
+Rob\
+\
+}

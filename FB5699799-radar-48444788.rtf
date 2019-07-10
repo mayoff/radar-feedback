@@ -1,0 +1,110 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 FB5699799\
+\
+
+\f1\i 2/27/19, 1:51:04 PM CST\
+\
+
+\f2\i0\b\fs36 crash after pasting a bare NSOutlineView into a xib 48444788\
+
+\fs30 Developer Tools\
+\
+
+\fs28 Basic Information\
+\
+
+\fs24 Please provide a descriptive title for your feedback\
+
+\f0\b0 crash after pasting a bare NSOutlineView into a xib\
+\
+
+\f2\b Which product are you seeing an issue with?\
+
+\f0\b0 Developer Tools\
+\
+
+\f2\b Which area are you seeing an issue with?\
+
+\f0\b0 \
+\
+
+\f2\b\fs28 Description\
+\
+
+\fs24 Please describe the issue and what steps we can take to reproduce it\
+
+\f0\b0 Dear Xcoderinos,\
+\
+I know it\'92s been a while (almost five months!) since I last filed a bug in Xcode. But that doesn\'92t mean I\'92ve forgotten about you. No, you Xcode developers are always in my heart. And that\'92s why I\'92m back to share another exciting way to crash Xcode in ___ easy steps. (Note to self: come back and fill in the blank later.)\
+\
+1. Launch Xcode 10.2 beta 3 (10P99q) on macOS 10.14.4 Beta (18E194d).\
+\
+2. Create a new project using the \'93Cocoa App\'94 template. Turn off \'93Use Storyboards\'94.\
+\
+3. Open MainMenu.xib.\
+\
+4. Drag an \'93Outline View\'94 from the library into the canvas.\
+\
+5. Open the disclosure triangles in the xib outline until the \'93Outline View\'94 object (of type NSOutlineView) is revealed.\
+\
+6. Select the NSOutlineView object and choose Edit > Copy from the menu bar.\
+\
+7. From the menu bar, choose File > New > File and create a xib using the \'93Empty\'94 template. I named mine \'93outline.xib\'94.\
+\
+8. From the menu bar, choose Edit > Paste.\
+\
+9. From the menu bar, choose File > Close \'93outline.xib\'94.\
+\
+Et voil\'e0, another Xcode crash for you to ponder in the wee hours. Enjoy!\
+\
+Affectionately,\
+Rob\
+\
+P.S. I\'92ll attach the crash report and a video demonstration.\
+\
+
+\f2\b\fs28 Files\
+
+\f0\b0\fs24 xcode-10.2b3-crash.mov\
+\
+
+\f1\i 2/27/19, 1:51:05 PM CST\
+
+\f2\i0\b Apple Said\
+
+\f0\b0 This feedback was created from radar ID 48444788\
+\
+\
+\
+\
+\
+\
+
+\f1\i 2/27/19, 1:51:09 PM CST\
+
+\f2\i0\b You Said\
+
+\f0\b0 Xcode_2019-02-27-132902_lmp-rmayoff01.crash\
+xcode-10.2b3-crash.mov\
+\
+\
+
+\f1\i 3/4/19, 3:59:10 AM CST\
+
+\f2\i0\b Apple Said\
+
+\f0\b0 Engineering has determined that your bug report is a duplicate of another issue and will be closed. \
+\
+The open or closed status of the original report your bug was duplicated to appears in a text box within the bug detail section of the bug reporter user interface. For security and privacy reasons, we don't provide access to the original bug yours was duped to.\
+\
+If you have any questions or concerns, please update your report directly at this link: https://bugreport.apple.com/.\
+\
+\
+\
+}

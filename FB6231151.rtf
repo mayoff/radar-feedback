@@ -1,0 +1,82 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 FB6231151\
+\
+
+\f1\i 6/25/19, 10:22:01 AM CDT\
+\
+
+\f2\i0\b\fs36 CGPoint should be Hashable\
+
+\fs30 Developer Tools | SwiftUI Framework\
+\
+
+\fs28 Basic information\
+\
+
+\fs24 Please provide a descriptive title for your feedback:\
+
+\f0\b0 CGPoint should be Hashable\
+\
+
+\f2\b Which area are you seeing an issue with?\
+
+\f0\b0 SwiftUI Framework\
+\
+
+\f2\b What type of feedback are you reporting?\
+
+\f0\b0 Suggestion\
+\
+
+\f2\b\fs28 Description\
+\
+
+\fs24 Please describe the issue:\
+
+\f0\b0 Dear SwiftUImplementors and/or CoreGraphicoders,\
+\
+Please conform CGPoint to Hashable, so that for example I can use it like this:\
+\
+    import SwiftUI\
+\
+    struct ScatterView : View \{\
+        var centers: [CGPoint]\
+\
+        var body: some View \{\
+            ZStack(alignment: .topLeading) \{\
+                ForEach(centers.identified(by: \\.self)) \{ center in\
+                // error: instance method 'identified(by:)' requires that 'CGPoint' conform to 'Hashable'\
+                    Circle()\
+                        .frame(width: 10, height: 10)\
+                        .position(center)\
+                \}\
+            \}\
+        \}\
+    \}\
+\
+Thanks,\
+Rob\
+\
+\
+
+\f2\b Please list the steps you took to reproduce the issue:\
+
+\f0\b0 Not answered\
+\
+
+\f2\b What did you expect to happen?\
+
+\f0\b0 Not answered\
+\
+
+\f2\b What actually happened?\
+
+\f0\b0 Not answered\
+\
+}

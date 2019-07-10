@@ -1,0 +1,95 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 FB6398401\
+\
+
+\f1\i 6/30/19, 5:54:30 PM CDT\
+\
+
+\f2\i0\b\fs36 SwiftUI Preview canvas doesn't animate some transitions\
+
+\fs30 Developer Tools | SwiftUI Framework\
+\
+
+\fs28 Basic information\
+\
+
+\fs24 Please provide a descriptive title for your feedback:\
+
+\f0\b0 SwiftUI Preview canvas doesn't animate some transitions\
+\
+
+\f2\b Which area are you seeing an issue with?\
+
+\f0\b0 SwiftUI Framework\
+\
+
+\f2\b What type of feedback are you reporting?\
+
+\f0\b0 Incorrect/Unexpected Behavior\
+\
+
+\f2\b\fs28 Description\
+\
+
+\fs24 Please describe the issue:\
+
+\f0\b0 Dear SwiftUImplementors,\
+\
+Please see the attached project. Each Text("Detail") views should slide in and out when the Show button above it is tapped. It works properly in the simulator. However, in a live preview canvas, only the Text under the Embedded heading animates in and out. The Text under the Unembedded heading appears and disappears without an animated transition.\
+\
+The problem appears to be related to whether the appearing/disappearing view has multiple instance of a named View type above it in the view hierarchy. The Text(\'93Detail\'94) under the Embedded label is under a ContentView which is itself under a ContentView. The Text(\'93Detail\'94) under the Unembedded label is directly under the top-level ContentView.\
+\
+I have also made a simpler demo in SimpleDemoView.swift. The simpler demo shows that the Text(\'93Detail\'94) isn't animated in the live preview canvas, but doesn't demonstrate that adding another ContentView in its ancestry fixes the problem.\
+\
+Love,\
+Rob\
+\
+P.S. Xcode Version 11.0 beta 2 (11M337n) on macOS 10.15 Beta (19A487l).\
+\
+
+\f2\b Please list the steps you took to reproduce the issue:\
+
+\f0\b0 1. Open the attached project, transition.xcodeproj.\
+2. Run the device on a simulator.\
+3. Tap the Show button under the Embedded label. Observe the animated appearance of \'93Detail\'94.\
+4. Tap the Show button under the Unembedded label. Observe the animated appearance of \'93Detail\'94.\
+5. Open ContentView.swift in Xcode.\
+6. Open the Editor and Canvas view.\
+7. Resume updating of the preview.\
+8. Click the play button to enabled live preview.\
+9. Tap the Show button under the Embedded label. Observe the animated appearance of \'93Detail\'94.\
+10. Tap the Show button under the Unembedded label. Observe the sudden, bone-jarring appearance of \'93Detail\'94.\
+\
+
+\f2\b What did you expect to happen?\
+
+\f0\b0 What I expected was for \'93Detail\'94 to appear and disappear animatedly in all cases.\
+\
+
+\f2\b What actually happened?\
+
+\f0\b0 What actually happened was \'93Detail\'94 made a shockingly unanimated appearance and disappearance in the live preview canvas when not embedded in a nested named View type.\
+\
+\
+\
+
+\f2\b\fs28 Files\
+
+\f0\b0\fs24 transition.zip\
+\
+\
+\
+
+\f1\i 7/2/19, 2:36:48 PM CDT\
+
+\f2\i0\b You Said\
+
+\f0\b0 This continues to be broken in Xcode Version 11.0 beta 3 (11M362v).\
+\
+}

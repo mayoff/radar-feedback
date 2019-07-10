@@ -1,0 +1,79 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 FB6143207\
+\
+
+\f1\i 6/10/19, 2:21:03 PM CDT\
+\
+
+\f2\i0\b\fs36 VStack.init is missing @ViewBuilder annotation in generated interface\
+
+\fs30 Developer Tools\
+\
+
+\fs28 Basic information\
+\
+
+\fs24 Please provide a descriptive title for your feedback:\
+
+\f0\b0 VStack.init is missing @ViewBuilder annotation in generated interface\
+\
+
+\f2\b Which area are you seeing an issue with?\
+
+\f0\b0 \
+\
+
+\f2\b What type of feedback are you reporting?\
+
+\f0\b0 Incorrect/Unexpected Behavior\
+\
+
+\f2\b\fs28 Description\
+\
+
+\fs24 Please describe the issue:\
+
+\f0\b0 Dear Swifterinos (or possibly Xcoderinos),\
+\
+The \'93Generated Interface\'94 for VStack.init (and, no doubt, other methods) is missing the @ViewBuilder annotation.\
+\
+This annotation is very important because it changes the syntax allowed in the content closure.\
+\
+Love,\
+Rob\
+\
+
+\f2\b Please list the steps you took to reproduce the issue:\
+
+\f0\b0 1. Launch Xcode 11 beta 1.\
+2. File > Open Quickly\'85\
+3. Type \'93swiftui\'94.\
+4. Open SwiftUI.h.\
+5. Click the Related Items icon at the top left of the editor.\
+6. From the Related Items menu, choose Generated Interface > SwiftUI.\
+7. Find \'93struct VStack\'94 in the generated interface file.\
+\
+
+\f2\b What did you expect to happen?\
+
+\f0\b0 I expected the declaration of VStack.init to match the documented declaration:\
+\
+init(alignment: HorizontalAlignment = .center, spacing: Length? = nil, @ViewBuilder content: () -> Content)\
+\
+Documentation found here: https://developer.apple.com/documentation/swiftui/vstack/3278367-init\
+\
+
+\f2\b What actually happened?\
+
+\f0\b0 What actually happened is the generated interface's declaration of VStack.init omits the @ViewBuilder annotation:\
+\
+@inlinable public init(alignment: HorizontalAlignment = .center, spacing: Length? = nil, content: () -> Content)\
+\
+\
+}
