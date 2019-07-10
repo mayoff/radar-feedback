@@ -1,0 +1,117 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 FB6604414\
+\
+
+\f1\i 7/10/19, 1:47:17 PM CDT\
+\
+
+\f2\i0\b\fs36 SwiftUI crash in, I dunno, maybe Picker?\
+
+\fs30 Developer Tools | SwiftUI Framework\
+\
+
+\fs28 Basic information\
+\
+
+\fs24 Please provide a descriptive title for your feedback:\
+
+\f0\b0 SwiftUI crash in, I dunno, maybe Picker?\
+\
+
+\f2\b Which area are you seeing an issue with?\
+
+\f0\b0 SwiftUI Framework\
+\
+
+\f2\b What type of feedback are you reporting?\
+
+\f0\b0 Application Crash\
+\
+
+\f2\b\fs28 Description\
+\
+
+\fs24 Please describe the issue:\
+
+\f0\b0 Dear SwiftUImplementors,\
+\
+The atttached project crashes with EXC_BAD_INSTRUCTION. Why does it crash? No idea. No frames in the stack trace belong to the project\'92s code. Maybe I\'92m doing something wrong, in which case SwiftUI should emit an error message. Maybe I\'92m doing everything right, in which case SwiftUI should not crash.\
+\
+Please make it not crash, or emit an error explaining what I did wrong.\
+\
+Thanks,\
+Rob\
+\
+P.S. Xcode Version 11.0 beta 3 (11M362v) on macOS Mojave 10.14.6 Beta (18G48f).\
+\
+\
+
+\f2\b Please list the steps you took to reproduce the issue:\
+
+\f0\b0 1. Run the test app in the attached project on the iPhone Xs simulator.\
+\
+2. Scroll to \'93Day 6\'94 in the picker.\
+\
+3. Click \'93Month\'94 in the segmented control.\
+\
+4. Receive EXC_BAD_INSTRUCTION.\
+\
+\
+
+\f2\b What did you expect to happen?\
+
+\f0\b0 What I expected was a glorious crash-free development experience.\
+\
+
+\f2\b What actually happened?\
+
+\f0\b0 What actually happened was the app crashed with the following stack trace:\
+\
+(lldb) bt\
+* thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_INSTRUCTION (code=EXC_I386_INVOP, subcode=0x0)\
+    frame #0: sp=0x00007ffeebfc5610 fp=0x00007ffeebfc5760 pc=0x00007fff2c40f067 SwiftUI`closure #1 (inout Swift.Int, SwiftUI.(DynamicContentState in _4103B39A1695DB4F1CFCE0B3FB46910F)<A, B>.Item) -> Swift.Bool in SwiftUI.(DynamicContentState in _4103B39A1695DB4F1CFCE0B3FB46910F).apply(from: inout Swift.Int, list: Swift.Optional<AttributeGraph.Attribute<SwiftUI.ViewList>>, to: (SwiftUI._ViewList_Sublist) -> Swift.Bool) -> Swift.Bool + 2039\
+    frame #1: sp=0x000000000000006f fp=0x00007ffeebfc58a0 pc=0x00007fff2c40e3bb SwiftUI`SwiftUI.(DynamicContentState in _4103B39A1695DB4F1CFCE0B3FB46910F).forEachItem(from: inout Swift.Int, do: (inout Swift.Int, SwiftUI.(DynamicContentState in _4103B39A1695DB4F1CFCE0B3FB46910F)<A, B>.Item) -> Swift.Bool) -> Swift.Bool + 955\
+    frame #2: sp=0x00007ffeebfc58b0 fp=0x00007ffeebfc58f0 pc=0x00007fff2c40e858 SwiftUI`SwiftUI.(DynamicContentState in _4103B39A1695DB4F1CFCE0B3FB46910F).apply(from: inout Swift.Int, list: Swift.Optional<AttributeGraph.Attribute<SwiftUI.ViewList>>, to: (SwiftUI._ViewList_Sublist) -> Swift.Bool) -> Swift.Bool + 56\
+    frame #3: sp=0x00007ffeebfc5900 fp=0x00007ffeebfc5930 pc=0x00007fff2c410450 SwiftUI`SwiftUI.(DynamicContentList in _4103B39A1695DB4F1CFCE0B3FB46910F).apply(from: inout Swift.Int, list: Swift.Optional<AttributeGraph.Attribute<SwiftUI.ViewList>>, to: (SwiftUI._ViewList_Sublist) -> Swift.Bool) -> Swift.Bool + 64\
+    frame #4: sp=0x00007ffeebfc5940 fp=0x00007ffeebfc5970 pc=0x00007fff2c41062b SwiftUI`protocol witness for SwiftUI.ViewList.apply(from: inout Swift.Int, list: Swift.Optional<AttributeGraph.Attribute<SwiftUI.ViewList>>, to: (SwiftUI._ViewList_Sublist) -> Swift.Bool) -> Swift.Bool in conformance SwiftUI.(DynamicContentList in _4103B39A1695DB4F1CFCE0B3FB46910F)<A, B> : SwiftUI.ViewList in SwiftUI + 43\
+    frame #5: sp=0x00007ffeebfc5980 fp=0x00007ffeebfc5c00 pc=0x00007fff2c1efbf4 SwiftUI`SwiftUI.WheelPickerStyle.DataSource.rows(in: Swift.Int) -> Swift.Array<SwiftUI.WheelPickerRow<Swift.AnyHashable, SwiftUI._VariadicView_Children.Element>> + 468\
+    frame #6: sp=0x00007ffeebfc5c10 fp=0x00007ffeebfc5c20 pc=0x00007fff2c1efd9e SwiftUI`protocol witness for SwiftUI.CustomWheelPickerDataSource.rows(in: Swift.Int) -> A.Rows in conformance SwiftUI.WheelPickerStyle.DataSource : SwiftUI.CustomWheelPickerDataSource in SwiftUI + 14\
+    frame #7: sp=0x00007ffeebfc5c30 fp=0x00007ffeebfc5f00 pc=0x00007fff2c508826 SwiftUI`SwiftUI.(CoreCoordinator in _6F6D7FC252FF6BD4B4AE026DA1B17798).pickerView(_: __C.UIPickerView, viewForRow: Swift.Int, forComponent: Swift.Int, reusing: Swift.Optional<__C.UIView>) -> __C.UIView + 566\
+    frame #8: sp=0x00007ffeebfc5f10 fp=0x00007ffeebfc5f50 pc=0x00007fff2c508a9b SwiftUI`@objc SwiftUI.(CoreCoordinator in _6F6D7FC252FF6BD4B4AE026DA1B17798).pickerView(_: __C.UIPickerView, viewForRow: Swift.Int, forComponent: Swift.Int, reusing: Swift.Optional<__C.UIView>) -> __C.UIView + 91\
+    frame #9: sp=0x00007ffeebfc5f60 fp=0x00007ffeebfc5fb0 pc=0x00007fff46c29203 UIKitCore`-[UIPickerView tableView:cellForRowAtIndexPath:] + 583\
+    frame #10: sp=0x00007ffeebfc5fc0 fp=0x00007ffeebfc6000 pc=0x00007fff46c1e55b UIKitCore`-[UIPickerColumnView tableView:cellForRowAtIndexPath:] + 161\
+    frame #11: sp=0x00007ffeebfc6010 fp=0x00007ffeebfc60f0 pc=0x00007fff46e92a7d UIKitCore`-[UITableView _createPreparedCellForGlobalRow:withIndexPath:willDisplay:] + 787\
+    frame #12: sp=0x00007ffeebfc6100 fp=0x00007ffeebfc62b0 pc=0x00007fff46e5c3a4 UIKitCore`-[UITableView _updateVisibleCellsNow:] + 2868\
+    frame #13: sp=0x00007ffeebfc62c0 fp=0x00007ffeebfc6330 pc=0x00007fff46e7bf77 UIKitCore`-[UITableView layoutSubviews] + 163\
+    frame #14: sp=0x00007ffeebfc6340 fp=0x00007ffeebfc65c0 pc=0x00007fff46c212e3 UIKitCore`__35-[UIPickerTableView layoutSubviews]_block_invoke + 74\
+    frame #15: sp=0x00007ffeebfc65d0 fp=0x00007ffeebfc65f0 pc=0x00007fff471580dd UIKitCore`+[UIView(Animation) performWithoutAnimation:] + 84\
+    frame #16: sp=0x00007ffeebfc6600 fp=0x00007ffeebfc6630 pc=0x00007fff46c21293 UIKitCore`-[UIPickerTableView layoutSubviews] + 80\
+    frame #17: sp=0x00007ffeebfc6640 fp=0x00007ffeebfc6820 pc=0x00007fff47165cbb UIKitCore`-[UIView(CALayerDelegate) layoutSublayersOfLayer:] + 2360\
+    frame #18: sp=0x00007ffeebfc6830 fp=0x00007ffeebfc6850 pc=0x00007fff2b17cf1d QuartzCore`-[CALayer layoutSublayers] + 255\
+    frame #19: sp=0x00007ffeebfc6860 fp=0x00007ffeebfc78f0 pc=0x00007fff2b181927 QuartzCore`CA::Layer::layout_if_needed(CA::Transaction*) + 517\
+    frame #20: sp=0x00007ffeebfc7900 fp=0x00007ffeebfc89a0 pc=0x00007fff2b18e1be QuartzCore`CA::Layer::layout_and_display_if_needed(CA::Transaction*) + 80\
+    frame #21: sp=0x00007ffeebfc89b0 fp=0x00007ffeebfc8cc0 pc=0x00007fff2b0d6d6b QuartzCore`CA::Context::commit_transaction(CA::Transaction*, double) + 327\
+    frame #22: sp=0x00007ffeebfc8cd0 fp=0x00007ffeebfc8d70 pc=0x00007fff2b10c233 QuartzCore`CA::Transaction::commit() + 643\
+    frame #23: sp=0x00007ffeebfc8d80 fp=0x00007ffeebfc8dc0 pc=0x00007fff46cc104f UIKitCore`_afterCACommitHandler + 160\
+    frame #24: sp=0x00007ffeebfc8dd0 fp=0x00007ffeebfc8dd0 pc=0x00007fff23a5c417 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__ + 23\
+    frame #25: sp=0x00007ffeebfc8de0 fp=0x00007ffeebfc8e70 pc=0x00007fff23a56eae CoreFoundation`__CFRunLoopDoObservers + 430\
+    frame #26: sp=0x00007ffeebfc8e80 fp=0x00007ffeebfc9b70 pc=0x00007fff23a5752a CoreFoundation`__CFRunLoopRun + 1514\
+    frame #27: sp=0x00007ffeebfc9b80 fp=0x00007ffeebfc9c00 pc=0x00007fff23a56c16 CoreFoundation`CFRunLoopRunSpecific + 438\
+    frame #28: sp=0x00007ffeebfc9c10 fp=0x00007ffeebfc9c20 pc=0x00007fff37a98bb0 GraphicsServices`GSEventRunModal + 65\
+    frame #29: sp=0x00007ffeebfc9c30 fp=0x00007ffeebfc9ca0 pc=0x00007fff46c97bef UIKitCore`UIApplicationMain + 1621\
+  * frame #30: sp=0x00007ffeebfc9cb0 fp=0x00007ffeebfc9ce0 pc=0x0000000103c3635b test`main + 75 at AppDelegate.swift:6\
+    frame #31: sp=0x00007ffeebfc9cf0 fp=0x00007ffeebfc9cf8 pc=0x00007fff50fb24ad libdyld.dylib`start + 1\
+    frame #32: sp=0x00007ffeebfc9d08 fp=0x0000000000000000 pc=0x00007fff50fb24ad libdyld.dylib`start + 1\
+\
+\
+
+\f2\b\fs28 Files\
+
+\f0\b0\fs24 test.zip\
+}
